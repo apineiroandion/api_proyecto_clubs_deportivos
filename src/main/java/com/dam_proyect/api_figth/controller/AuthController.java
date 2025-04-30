@@ -3,7 +3,6 @@ package com.dam_proyect.api_figth.controller;
 import com.dam_proyect.api_figth.dto.LoginRequest;
 import com.dam_proyect.api_figth.dto.RegisterRequest;
 import com.dam_proyect.api_figth.dto.ResponseModel;
-import com.dam_proyect.api_figth.model.User;
 import com.dam_proyect.api_figth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
