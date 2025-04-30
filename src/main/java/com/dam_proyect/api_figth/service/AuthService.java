@@ -25,7 +25,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUser(RegisterRequest request) {
+    public Boolean registerUser(RegisterRequest request) {
         if (userRepository.findByUsername(request.getUsername()) != null) {
             throw new RuntimeException("User already exists");
         }
@@ -52,6 +52,7 @@ public class AuthService {
         // Simulación del envío de email
         System.out.println("Haz clic para activar tu cuenta:");
         System.out.println("http://localhost:8080/api/auth/confirm?token=" + token);
+        return true;
     }
 
     public String confirmToken(String token) {
