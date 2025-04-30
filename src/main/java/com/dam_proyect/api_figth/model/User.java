@@ -32,8 +32,8 @@ public class User {
         this.phone = phone;
     }
 
-    public void isEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public String getId() {
