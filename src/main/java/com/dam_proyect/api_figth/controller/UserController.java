@@ -12,12 +12,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        userService.registerUser(user);
-        return user;
-    }
-
     @GetMapping("{username}")
     public User getUser(@PathVariable String username) {
         return userService.getUserByUsername(username);

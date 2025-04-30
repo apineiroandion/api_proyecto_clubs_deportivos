@@ -11,12 +11,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User registerUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new RuntimeException("User already exists");
-        }
-        return userRepository.save(user);
-    }
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
