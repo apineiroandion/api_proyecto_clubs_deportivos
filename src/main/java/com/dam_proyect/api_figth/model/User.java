@@ -17,11 +17,12 @@ public class User {
     private String email;
     private String password;
     private String phone;
+    private Boolean enabled;
 
     public User() {
     }
 
-    public User(String id, String username, String name, String surname, String email, String password, String phone) {
+    public User(String id, String username, String name, String surname, String email, String password, String phone, Boolean enabled) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -29,6 +30,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.enabled = enabled;
     }
 
     public String getId() {
@@ -85,5 +87,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
