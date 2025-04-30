@@ -17,12 +17,12 @@ public class User {
     private String email;
     private String password;
     private String phone;
-    private Boolean enabled;
+    private Boolean enabled = false;
 
     public User() {
     }
 
-    public User(String id, String username, String name, String surname, String email, String password, String phone, Boolean enabled) {
+    public User(String id, String username, String name, String surname, String email, String password, String phone) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -30,7 +30,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.enabled = enabled;
     }
 
     public String getId() {
