@@ -1,11 +1,11 @@
 package com.dam_proyect.api_figth.dto;
 
-public class ResponseModel<T> {
+public class ResponseBaseDto<T> {
     private String message;
     private boolean success;
     private T data;
 
-    public ResponseModel(String message, boolean success, T data) {
+    public ResponseBaseDto(String message, boolean success, T data) {
         this.message = message;
         this.success = success;
         this.data = data;
