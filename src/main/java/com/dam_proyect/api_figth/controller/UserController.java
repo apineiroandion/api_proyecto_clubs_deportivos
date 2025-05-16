@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/register")
+    @PostMapping()
     public ResponseEntity<ResponseBaseDto<String>> register(@RequestBody RegisterRequestDto dto) {
         try{
             boolean isRegistered = userService.registerUser(dto);
@@ -37,8 +37,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/confirm")
-    public String confirm(@RequestParam("token") String token) {
+    @GetMapping("/activate")
+    public String activate(@RequestParam("token") String token) {
         return userService.activateAccount(token);
     }
 
