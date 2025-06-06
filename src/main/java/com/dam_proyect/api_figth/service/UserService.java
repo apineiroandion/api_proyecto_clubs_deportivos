@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -80,13 +81,11 @@ public class UserService implements IUserService {
     }
 
     public void resetPassword(String email, String newPassword) {
-        User user = userRepository.findByEmail(email);
+        Optional<User> user = userRepository.findByEmail(email);
         if (user == null) {
             throw new RuntimeException("Usuario no encontrado");
         }
-
-        user.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(user);
+        //implementar lógica para enviar un correo electrónico de restablecimiento de contraseña
     }
 
     public void changePassword(String oldPassword, String newPassword) {

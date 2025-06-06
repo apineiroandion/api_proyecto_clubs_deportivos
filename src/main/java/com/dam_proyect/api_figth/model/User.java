@@ -18,6 +18,7 @@ public class User {
     private String password;
     private String phone;
     private Boolean enabled = false;
+    private String role;
 
     public User() {
     }
@@ -99,4 +100,5 @@ public class User {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
 }
