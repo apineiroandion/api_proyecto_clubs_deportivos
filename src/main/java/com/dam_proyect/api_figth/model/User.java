@@ -1,10 +1,10 @@
 package com.dam_proyect.api_figth.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,7 +18,10 @@ public class User {
     private String password;
     private String phone;
     private Boolean enabled = false;
-    private String role;
+    private LocalDate createdAt = LocalDate.now();
+    private String profilePicture;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ClubMembership> memberships = new ArrayList<>();
 
     public User() {
     }
@@ -99,6 +102,23 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public LocalDate getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+    public List<ClubMembership> getMemberships() {
+        return memberships;
+    }
+    public void setMemberships(List<ClubMembership> memberships) {
+        this.memberships = memberships;
     }
 
 }

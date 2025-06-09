@@ -3,8 +3,8 @@ package com.dam_proyect.api_figth.controller;
 import com.dam_proyect.api_figth.dto.RegisterRequestDto;
 import com.dam_proyect.api_figth.dto.ResponseBaseDto;
 import com.dam_proyect.api_figth.model.User;
-import com.dam_proyect.api_figth.service.UserService;
-import com.dam_proyect.api_figth.service.contract.IUserService;
+import com.dam_proyect.api_figth.service.contract.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @PostMapping()
-    public ResponseEntity<ResponseBaseDto<String>> register(@RequestBody RegisterRequestDto dto) {
+    public ResponseEntity<ResponseBaseDto<String>> register(@Valid @RequestBody RegisterRequestDto dto) {
         try{
             boolean isRegistered = userService.registerUser(dto);
             if (isRegistered) {

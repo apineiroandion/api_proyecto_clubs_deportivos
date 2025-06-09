@@ -1,24 +1,19 @@
 package com.dam_proyect.api_figth.service;
 
-import com.dam_proyect.api_figth.dto.RegisterRequestDto;
 import com.dam_proyect.api_figth.model.User;
-import com.dam_proyect.api_figth.model.tokens.VerificationToken;
 import com.dam_proyect.api_figth.repository.UserRepository;
 import com.dam_proyect.api_figth.repository.VerificationTokenRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Service
-public class AuthService {
+public class AuthServiceImpl {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final VerificationTokenRepository tokenRepository;
 
-    public AuthService(UserRepository userRepository, VerificationTokenRepository tokenRepository, PasswordEncoder passwordEncoder) {
+    public AuthServiceImpl(UserRepository userRepository, VerificationTokenRepository tokenRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.passwordEncoder = passwordEncoder;

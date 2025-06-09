@@ -23,6 +23,8 @@ public class RegisterRequestDto {
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     private String password;
 
+    @NotBlank(message = "El teléfono es obligatorio")
+    @Size(min = 10, max = 15, message = "El teléfono debe tener entre 10 y 15 caracteres")
     private String phone;
 
     // Getters y setters

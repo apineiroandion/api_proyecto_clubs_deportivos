@@ -5,17 +5,19 @@ import com.dam_proyect.api_figth.model.User;
 import com.dam_proyect.api_figth.model.tokens.VerificationToken;
 import com.dam_proyect.api_figth.repository.UserRepository;
 import com.dam_proyect.api_figth.repository.VerificationTokenRepository;
-import com.dam_proyect.api_figth.service.contract.IUserService;
+import com.dam_proyect.api_figth.service.contract.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -75,7 +77,7 @@ public class UserService implements IUserService {
     }
 
     public void sendVerificationEmail(String email) {
-        // Implementar lógica para enviar un correo electrónico de verificación
+        // TODO: Implementar lógica para enviar un correo electrónico de verificación
         // Esto podría incluir el uso de un servicio de correo electrónico como SendGrid, Amazon SES, etc.
         System.out.println("Enviando correo de verificación a " + email);
     }
@@ -85,11 +87,16 @@ public class UserService implements IUserService {
         if (user == null) {
             throw new RuntimeException("Usuario no encontrado");
         }
-        //implementar lógica para enviar un correo electrónico de restablecimiento de contraseña
+        // TODO: implementar lógica para enviar un correo electrónico de restablecimiento de contraseña
     }
 
     public void changePassword(String oldPassword, String newPassword) {
-        // Implementar lógica para cambiar la contraseña del usuario autenticado
+        // TODO: Implementar lógica para cambiar la contraseña del usuario autenticado
+    }
+
+    public String uploadUserImage(MultipartFile image) throws IOException {
+        // TODO: Implementar lógica para subir la imagen del usuario
+        return "Imagen subida correctamente";
     }
 
 
