@@ -40,9 +40,5 @@ public record CustomUserDetails(User user) implements UserDetails {
         return true;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return user.isEnabled(); // o true si no gestionas esto aún
-    }
 }
 

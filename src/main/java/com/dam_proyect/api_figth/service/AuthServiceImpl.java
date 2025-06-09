@@ -23,7 +23,7 @@ public class AuthServiceImpl {
         User user = userRepository.findByUsername(username);
         if (user == null) throw new RuntimeException("Usuario no encontrado");
 
-        if (!user.isEnabled()) throw new RuntimeException("La cuenta no está activada");
+        if (!user.getEnabled()) throw new RuntimeException("La cuenta no está activada");
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Contraseña incorrecta");

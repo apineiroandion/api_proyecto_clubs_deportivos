@@ -5,10 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class VerificationToken {
     @Id
     private String token;
@@ -17,37 +23,4 @@ public class VerificationToken {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
     private LocalDateTime expiryDate;
-
-    public VerificationToken() {
-    }
-
-    public VerificationToken(String token, User user, LocalDateTime expiryDate) {
-        this.token = token;
-        this.user = user;
-        this.expiryDate = expiryDate;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public LocalDateTime getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDateTime expiryDate) {
-        this.expiryDate = expiryDate;
-    }
 }
