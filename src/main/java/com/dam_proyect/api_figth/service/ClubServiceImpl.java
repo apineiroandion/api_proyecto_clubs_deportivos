@@ -17,10 +17,11 @@ import java.util.UUID;
 public class ClubServiceImpl implements ClubService {
 
     private final ClubRepository repository;
-    private final ClubMapper mapper = ClubMapper.INSTANCE;
+    private final ClubMapper mapper;
 
-    public ClubServiceImpl(ClubRepository repository) {
+    public ClubServiceImpl(ClubRepository repository, ClubMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
 

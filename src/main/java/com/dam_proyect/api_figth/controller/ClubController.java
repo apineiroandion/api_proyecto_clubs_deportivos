@@ -17,7 +17,7 @@ public class ClubController {
     }
 
     @PostMapping()
-    public ResponseBaseDto<ClubResponseDto> createClub(ClubCreateRequestDto clubCreateRequestDto) {
+    public ResponseBaseDto<ClubResponseDto> createClub(@RequestBody ClubCreateRequestDto clubCreateRequestDto) {
         try {
             return clubService.createClub(clubCreateRequestDto);
         } catch (Exception e) {

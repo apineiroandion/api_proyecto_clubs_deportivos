@@ -7,16 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ClubMapper {
-    ClubMapper INSTANCE = Mappers.getMapper(ClubMapper.class);
-
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "location", source = "location")
-    @Mapping(target = "contactEmail", source = "contactEmail")
-    @Mapping(target = "contactPhone", source = "contactPhone")
-    @Mapping(target = "imageUrl", source = "imageUrl")
 
     Club toEntity(ClubCreateRequestDto dto);
 
