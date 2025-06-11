@@ -4,6 +4,7 @@ import com.dam_proyect.api_figth.dto.ClubCreateRequestDto;
 import com.dam_proyect.api_figth.dto.ClubResponseDto;
 import com.dam_proyect.api_figth.dto.ResponseBaseDto;
 import com.dam_proyect.api_figth.service.contract.ClubService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +18,7 @@ public class ClubController {
     }
 
     @PostMapping()
-    public ResponseBaseDto<ClubResponseDto> createClub(@RequestBody ClubCreateRequestDto clubCreateRequestDto) {
+    public ResponseBaseDto<ClubResponseDto> createClub(@Valid @RequestBody ClubCreateRequestDto clubCreateRequestDto) {
         try {
             return clubService.createClub(clubCreateRequestDto);
         } catch (Exception e) {
