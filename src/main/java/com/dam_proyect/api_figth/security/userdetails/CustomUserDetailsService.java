@@ -22,5 +22,12 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con email: " + email));
         return new CustomUserDetails(user);
     }
+
+    public CustomUserDetails loadUserById(String id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con id: " + id));
+        return new CustomUserDetails(user);
+    }
+
 }
 

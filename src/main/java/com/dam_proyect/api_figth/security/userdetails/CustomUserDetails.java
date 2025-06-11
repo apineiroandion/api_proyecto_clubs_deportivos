@@ -15,6 +15,10 @@ public record CustomUserDetails(User user) implements UserDetails {
         return Collections.emptyList();
     }
 
+    public String getId() {
+        return user.getId();  // Aquí devuelves el ID real
+    }
+
     @Override
     public String getPassword() {
         return user.getPassword();

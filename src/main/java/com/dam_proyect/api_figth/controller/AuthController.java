@@ -33,7 +33,7 @@ public class AuthController {
         );
 
         CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
-        String token = jwtUtil.generateToken(userDetails.getUsername());
+        String token = jwtUtil.generateToken(userDetails.getId());
 
         return ResponseEntity.ok(new AuthResponseDto(token));
     }

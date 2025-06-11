@@ -99,5 +99,10 @@ public class UserServiceImpl implements UserService {
         return "Imagen subida correctamente";
     }
 
+    public User getUserById(String id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
+
 
 }

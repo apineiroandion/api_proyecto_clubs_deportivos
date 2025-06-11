@@ -24,22 +24,18 @@ public class JWTUtil {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("sub", username);
-        // Aquí puedes añadir más claims si quieres
-
+    public String generateToken(String userId) {
         return Jwts.builder()
-                .setClaims(claims)
+                .setSubject(userId) // ← Aquí guardas el ID del usuario como subject
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
                 .signWith(secretKey)
                 .compact();
     }
 
-    public String extractUsername(String token) {
+    public String extractUserId(String token) {
         Claims claims = parseClaims(token);
-        return claims != null ? claims.getSubject() : null;
+        return claims != null ? claims.getSubject() : null; // ← Esto ahora devuelve el ID
     }
 
     public boolean isTokenExpired(String token) {
@@ -49,7 +45,7 @@ public class JWTUtil {
     }
 
     public boolean validateToken(String token, String username) {
-        String extractedUsername = extractUsername(token);
+        String extractedUsername = extractUserId(token);
         return extractedUsername != null && extractedUsername.equals(username) && !isTokenExpired(token);
     }
 

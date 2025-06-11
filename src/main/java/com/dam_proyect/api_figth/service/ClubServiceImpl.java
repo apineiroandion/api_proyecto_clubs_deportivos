@@ -1,15 +1,19 @@
 package com.dam_proyect.api_figth.service;
 
-import com.dam_proyect.api_figth.dto.ClubCreateRequestDto;
-import com.dam_proyect.api_figth.dto.ClubResponseDto;
-import com.dam_proyect.api_figth.dto.ClubUpdateRequestDto;
-import com.dam_proyect.api_figth.dto.ResponseBaseDto;
+import com.dam_proyect.api_figth.Commons.Role;
+import com.dam_proyect.api_figth.dto.*;
 import com.dam_proyect.api_figth.mapper.ClubMapper;
+import com.dam_proyect.api_figth.mapper.ClubMembershipMapper;
+import com.dam_proyect.api_figth.mapper.UserMapper;
 import com.dam_proyect.api_figth.model.Club;
+import com.dam_proyect.api_figth.model.User;
 import com.dam_proyect.api_figth.repository.ClubRepository;
+import com.dam_proyect.api_figth.service.contract.ClubMembershipService;
 import com.dam_proyect.api_figth.service.contract.ClubService;
+import com.dam_proyect.api_figth.service.contract.UserService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +23,9 @@ public class ClubServiceImpl implements ClubService {
     private final ClubRepository repository;
     private final ClubMapper mapper;
 
-    public ClubServiceImpl(ClubRepository repository, ClubMapper mapper) {
+    public ClubServiceImpl(
+            ClubRepository repository,
+            ClubMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -38,6 +44,11 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
+    public Club getClubByIdNoResponse(String id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
     public ResponseBaseDto<ClubResponseDto> getClubByName(String name) {
         // Implementation logic
         return null;
@@ -47,14 +58,12 @@ public class ClubServiceImpl implements ClubService {
     public ResponseBaseDto<ClubResponseDto> createClub(ClubCreateRequestDto clubDto) {
         Club club = mapper.toEntity(clubDto);
         club.setId(UUID.randomUUID().toString());
-        club.setCreatedAt(java.time.LocalDateTime.now().toString()); // Set current time as createdAt
+        club.setCreatedAt(LocalDateTime.now().toString());
+
         Club savedClub = repository.save(club);
         ClubResponseDto responseDto = mapper.toResponseDto(savedClub);
-        return new ResponseBaseDto<>(
-                "Club created successfully",
-                true,
-                responseDto
-        );
+
+        return new ResponseBaseDto<>("Club created successfully", true, responseDto);
     }
 
     @Override

@@ -13,6 +13,8 @@ public interface UserService {
 
     User getUserByUsername(String username);
 
+    User getUserById(String id);
+
     void sendVerificationEmail(String email);
 
     void resetPassword(String email, String newPassword);
