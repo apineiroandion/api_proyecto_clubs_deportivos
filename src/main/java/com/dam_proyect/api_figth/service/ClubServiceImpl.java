@@ -1,20 +1,15 @@
 package com.dam_proyect.api_figth.service;
 
-import com.dam_proyect.api_figth.Commons.Role;
 import com.dam_proyect.api_figth.dto.*;
 import com.dam_proyect.api_figth.mapper.ClubMapper;
-import com.dam_proyect.api_figth.mapper.ClubMembershipMapper;
-import com.dam_proyect.api_figth.mapper.UserMapper;
 import com.dam_proyect.api_figth.model.Club;
-import com.dam_proyect.api_figth.model.User;
 import com.dam_proyect.api_figth.repository.ClubRepository;
-import com.dam_proyect.api_figth.service.contract.ClubMembershipService;
 import com.dam_proyect.api_figth.service.contract.ClubService;
-import com.dam_proyect.api_figth.service.contract.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -31,27 +26,38 @@ public class ClubServiceImpl implements ClubService {
     }
 
 
+
     @Override
     public ResponseBaseDto<List<ClubResponseDto>> getAllClubs() {
-        // Implementation logic
-        return null;
+        List<Club> clubs = repository.findAll();
+        List<ClubResponseDto> clubResponseDTOs = mapper.toResponseDtos(clubs);
+
+        if (clubResponseDTOs.isEmpty()) {
+            return new ResponseBaseDto<>("No clubs found", false, null);
+        }
+
+        return new ResponseBaseDto<>("Clubs retrieved successfully", true, clubResponseDTOs);
     }
 
     @Override
     public ResponseBaseDto<ClubResponseDto> getClubById(String id) {
-        // Implementation logic
-        return null;
-    }
-
-    @Override
-    public Club getClubByIdNoResponse(String id) {
-        return repository.findById(id).orElse(null);
+        Club club = repository.findById(id).orElse(null);
+        if (club == null) {
+            return new ResponseBaseDto<>("Club not found", false, null);
+        }
+        ClubResponseDto responseDto = mapper.toResponseDto(club);
+        return new ResponseBaseDto<>("Club retrieved successfully", true, responseDto);
     }
 
     @Override
     public ResponseBaseDto<ClubResponseDto> getClubByName(String name) {
-        // Implementation logic
-        return null;
+        Optional<Club> clubOptional = repository.findByName(name);
+        if (clubOptional.isEmpty()) {
+            return new ResponseBaseDto<>("Club not found", false, null);
+        }
+        Club club = clubOptional.get();
+        ClubResponseDto responseDto = mapper.toResponseDto(club);
+        return new ResponseBaseDto<>("Club retrieved successfully", true, responseDto);
     }
 
     @Override
@@ -68,8 +74,11 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public ResponseBaseDto<ClubResponseDto> updateClub(String id, ClubUpdateRequestDto clubDto) {
-        // Implementation logic
-        return null;
+        Club club = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Club not found"));
+        mapper.updateClubFromDto(clubDto, club);
+        repository.save(club);
+        ClubResponseDto responseDto = mapper.toResponseDto(club);
+        return new ResponseBaseDto<>("Club updated successfully", true, responseDto);
     }
 
     @Override
@@ -82,20 +91,14 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public ResponseBaseDto<List<ClubResponseDto>> getClubsByMembership(String membershipId) {
-        // Implementation logic
-        return null;
-    }
-
-    @Override
-    public ResponseBaseDto<List<ClubResponseDto>> getClubsByUser(String userId) {
-        // Implementation logic
-        return null;
-    }
-
-    @Override
     public ResponseBaseDto<List<ClubResponseDto>> getClubsByLocation(String location) {
-        // Implementation logic
-        return null;
+        List<Club> clubs = repository.findByLocation(location);
+        List<ClubResponseDto> clubResponseDTOs = mapper.toResponseDtos(clubs);
+
+        if (clubResponseDTOs.isEmpty()) {
+            return new ResponseBaseDto<>("No clubs found for the specified location", false, null);
+        }
+
+        return new ResponseBaseDto<>("Clubs retrieved successfully", true, clubResponseDTOs);
     }
 }

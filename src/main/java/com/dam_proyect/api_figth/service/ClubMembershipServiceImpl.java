@@ -81,4 +81,18 @@ public class ClubMembershipServiceImpl implements ClubMembershipService {
                 responseDtos
         );
     }
+
+    @Override
+    public ResponseBaseDto<ClubMembershipResponseDto> getClubMembership(String membershipId) {
+        Optional<ClubMembership> membership = repository.findById(membershipId);
+        if (membership.isEmpty()) {
+            return new ResponseBaseDto<>("Membership not found", false, null);
+        }
+        ClubMembershipResponseDto responseDto = mapper.toResponseDto(membership.get());
+        return new ResponseBaseDto<>(
+                "Fetched membership successfully",
+                true,
+                responseDto
+        );
+    }
 }

@@ -10,6 +10,7 @@ public interface ClubMembershipService {
     ResponseBaseDto<ClubMembershipResponseDto> joinClub(ClubMembershipCreateRequestDto dto);
     ResponseBaseDto<Void> leaveClub(String membershipId);
     ResponseBaseDto<Void> leaveClub(String userId, String clubId);
+    ResponseBaseDto<ClubMembershipResponseDto> getClubMembership(String membershipId);
     ResponseBaseDto<List<ClubMembershipResponseDto>> getMembershipsByUser(String userId);
     ResponseBaseDto<List<ClubMembershipResponseDto>> getMembershipsByClub(String clubId);
 }

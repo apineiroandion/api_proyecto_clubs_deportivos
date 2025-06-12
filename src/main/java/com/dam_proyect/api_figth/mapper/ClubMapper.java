@@ -2,10 +2,15 @@ package com.dam_proyect.api_figth.mapper;
 
 import com.dam_proyect.api_figth.dto.ClubCreateRequestDto;
 import com.dam_proyect.api_figth.dto.ClubResponseDto;
+import com.dam_proyect.api_figth.dto.ClubUpdateRequestDto;
 import com.dam_proyect.api_figth.model.Club;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
+import java.util.Optional;
 
 @Mapper(componentModel = "spring")
 public interface ClubMapper {
@@ -14,4 +19,12 @@ public interface ClubMapper {
 
     @Mapping(target = "createdAt", source = "createdAt", dateFormat = "yyyy-MM-dd HH:mm:ss")
     ClubResponseDto toResponseDto(Club entity);
+
+    List<ClubResponseDto> toResponseDtos(List<Club> entities);
+
+    void updateClubFromDto(ClubUpdateRequestDto dto, @MappingTarget Club club);
+
+    default String map(Optional<String> value) {
+        return value.orElse(null);
+    }
 }
