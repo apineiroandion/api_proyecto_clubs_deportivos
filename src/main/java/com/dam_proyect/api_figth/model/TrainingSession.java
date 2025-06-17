@@ -20,7 +20,7 @@ public class TrainingSession {
     private String description;
     private LocalDate date;
 
-    @OneToOne
+    @ManyToOne
     private ClubMembership trainer;
 
     @ManyToOne
