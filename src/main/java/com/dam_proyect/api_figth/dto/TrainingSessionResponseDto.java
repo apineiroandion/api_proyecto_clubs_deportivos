@@ -15,6 +15,6 @@ public class TrainingSessionResponseDto {
     private String description;
     private String date;
     private ClubResponseDto club;
-    private ClubMembershipResponseDto trainer;
-    private ClubMembershipResponseDto[] attendees;
+    private ClubMembershipSimpleResponseDto trainer;
+    private ClubMembershipSimpleResponseDto[] attendees;
 }
